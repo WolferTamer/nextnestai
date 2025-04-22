@@ -18,6 +18,10 @@ app = Flask(__name__)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("sql_uri")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_POOL_SIZE'] = 20  # Maximum number of connections in the pool
+app.config['SQLALCHEMY_POOL_TIMEOUT'] = 10  # Timeout for acquiring a connection from the pool (seconds)
+app.config['SQLALCHEMY_POOL_RECYCLE'] = 3600 # Recycle connections after 1 hour (in seconds)
+
 
 app.app_context().push()
 db.init_app(app)
